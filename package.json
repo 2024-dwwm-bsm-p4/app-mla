@@ -1,0 +1,11 @@
+{
+  "name": "ton-projet", 
+  "version": "1.0.0", 
+  "scripts": {
+    "build": "tailwindcss build src/styles.css -o dist/styles.css"
+  },
+  "dependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}
+
