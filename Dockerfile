@@ -34,6 +34,18 @@ RUN set -eux; \
 		pdo_pgsql \
 	;
 
+# Installer Node.js et npm
+RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - && \
+    apt-get install -y nodejs
+
+# Copier le code du projet
+WORKDIR /app
+COPY . .
+
+# Installer les dépendances npm
+RUN npm install
+
+
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
