@@ -38,6 +38,7 @@ RUN set -eux; \
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - && \
     apt-get update && apt-get install -y --no-install-recommends nodejs=16.20.2-1nodesource1
+rm -rf /var/lib/apt/lists/*
 
 # Copier le code du projet
 WORKDIR /app
