@@ -47,7 +47,7 @@ WORKDIR /app
 COPY . .
 
 # Installer les dépendances npm
-RUN RUN npm ci
+RUN RUN npm install
 
 
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
