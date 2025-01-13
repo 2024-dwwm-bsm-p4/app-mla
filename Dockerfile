@@ -36,7 +36,7 @@ RUN set -eux; \
 
 # Installer Node.js et npm
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - && \
-    apt-get install -y nodejs = lts
+    apt-get install -y nodejs = 16.20.2-1nodesource1
 
 # Copier le code du projet
 WORKDIR /app
