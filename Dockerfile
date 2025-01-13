@@ -1,4 +1,4 @@
-#syntax=docker/dockerfile:1
+# syntax=docker/dockerfile:1
 
 # Versions
 FROM dunglas/frankenphp:1-php8.3 AS frankenphp_upstream
@@ -7,32 +7,32 @@ FROM dunglas/frankenphp:1-php8.3 AS frankenphp_upstream
 # https://docs.docker.com/develop/develop-images/multistage-build/#stop-at-a-specific-build-stage
 # https://docs.docker.com/compose/compose-file/#target
 
-
 # Base FrankenPHP image
 FROM frankenphp_upstream AS frankenphp_base
 
 WORKDIR /app
 
+# Volumes pour persistance
 VOLUME /app/var/
 
-# persistent / runtime deps
+# Installation des dépendances système
 # hadolint ignore=DL3008
 RUN apt-get update && apt-get install -y --no-install-recommends \
-	acl \
-	file \
-	gettext \
-	git \
-	&& rm -rf /var/lib/apt/lists/*
+    acl \
+    file \
+    gettext \
+    git \
+    && rm -rf /var/lib/apt/lists/*
 
+# Installation des extensions PHP
 RUN set -eux; \
-	install-php-extensions \
-		@composer \
-		apcu \
-		intl \
-		opcache \
-		zip \
-		pdo_pgsql \
-	;
+    install-php-extensions \
+        @composer \
+        apcu \
+        intl \
+        opcache \
+        zip \
+        pdo_pgsql;
 
 # Installer Node.js et npm
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -41,18 +41,14 @@ RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - && \
     apt-get install -y --no-install-recommends nodejs=16.20.2-1nodesource1 && \
     rm -rf /var/lib/apt/lists/*
 
-
 # Copier le code du projet
-WORKDIR /app
 COPY . .
 
 # Installer les dépendances npm
-RUN RUN npm install
+RUN npm install
 
-
-# https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
+# Configuration Composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
-
 ENV PHP_INI_SCAN_DIR=":$PHP_INI_DIR/app.conf.d"
 
 ###> recipes ###
@@ -61,6 +57,7 @@ RUN install-php-extensions pdo_pgsql
 ###< doctrine/doctrine-bundle ###
 ###< recipes ###
 
+# Configuration FrankenPHP
 COPY --link frankenphp/conf.d/10-app.ini $PHP_INI_DIR/app.conf.d/
 COPY --link --chmod=755 frankenphp/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 COPY --link frankenphp/Caddyfile /etc/caddy/Caddyfile
@@ -78,9 +75,7 @@ ENV APP_ENV=dev XDEBUG_MODE=off
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
 RUN set -eux; \
-	install-php-extensions \
-		xdebug \
-	;
+    install-php-extensions xdebug;
 
 COPY --link frankenphp/conf.d/20-app.dev.ini $PHP_INI_DIR/app.conf.d/
 
@@ -97,18 +92,19 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 COPY --link frankenphp/conf.d/20-app.prod.ini $PHP_INI_DIR/app.conf.d/
 COPY --link frankenphp/worker.Caddyfile /etc/caddy/worker.Caddyfile
 
-# prevent the reinstallation of vendors at every changes in the source code
+# Prévention de la réinstallation des dépendances
 COPY --link composer.* symfony.* ./
 RUN set -eux; \
-	composer install --no-cache --prefer-dist --no-dev --no-autoloader --no-scripts --no-progress
+    composer install --no-cache --prefer-dist --no-dev --no-autoloader --no-scripts --no-progress;
 
-# copy sources
+# Copier le reste des sources
 COPY --link . ./
 RUN rm -Rf frankenphp/
 
 RUN set -eux; \
-	mkdir -p var/cache var/log; \
-	composer dump-autoload --classmap-authoritative --no-dev; \
-	composer dump-env prod; \
-	composer run-script --no-dev post-install-cmd; \
-	chmod +x bin/console; sync;
+    mkdir -p var/cache var/log; \
+    composer dump-autoload --classmap-authoritative --no-dev; \
+    composer dump-env prod; \
+    composer run-script --no-dev post-install-cmd; \
+    chmod +x bin/console; \
+    sync;
