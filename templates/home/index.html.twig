@@ -1,6 +1,57 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block body %}
+  <!-- Bannière -->
+  <header class="relative bg-cover bg-center h-[60vh]" style="background-image: url('banner.jpg');">
+    <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-center text-white p-4">
+      <h1 class="text-2xl md:text-4xl font-bold mb-4">
+        Frais, local et solidaire : <br> la nouvelle saveur de vos cantines.
+      </h1>
+      <a href="#produits" class="px-6 py-3 bg-green-500 text-white font-medium rounded-lg hover:bg-green-600 transition">
+        Découvrir les produits locaux
+      </a>
+    </div>
+  </header>
+
+  <!-- Section Services -->
+  <section class="bg-gray-200 py-8">
+    <h2 class="text-center text-xl md:text-2xl font-bold">Nos offres & services</h2>
+  </section>
+
+  <!-- Section Produits -->
+  <section id="produits" class="bg-gray-800 py-12 text-white">
+    <h2 class="text-center text-2xl md:text-3xl font-bold mb-8">Nos produits</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4 md:px-12">
+      <!-- Produit 1 -->
+      <div class="bg-gray-700 rounded-lg overflow-hidden shadow-md">
+        <img src="legumes.jpg" alt="Légumes" class="w-full h-40 object-cover">
+        <div class="p-4 text-center">
+          <p class="font-bold">Légumes</p>
+        </div>
+      </div>
+      <!-- Produit 2 -->
+      <div class="bg-gray-700 rounded-lg overflow-hidden shadow-md">
+        <img src="viandes.jpg" alt="Viandes" class="w-full h-40 object-cover">
+        <div class="p-4 text-center">
+          <p class="font-bold">Viandes</p>
+        </div>
+      </div>
+      <!-- Produit 3 -->
+      <div class="bg-gray-700 rounded-lg overflow-hidden shadow-md">
+        <img src="produits-laitiers.jpg" alt="Produits laitiers" class="w-full h-40 object-cover">
+        <div class="p-4 text-center">
+          <p class="font-bold">Produits laitiers</p>
+        </div>
+      </div>
+      <!-- Produit 4 -->
+      <div class="bg-gray-700 rounded-lg overflow-hidden shadow-md">
+        <img src="fruits.jpg" alt="Fruits" class="w-full h-40 object-cover">
+        <div class="p-4 text-center">
+          <p class="font-bold">Fruits</p>
+        </div>
+      </div>
+    </div>
+  </section>
 {% endblock %}

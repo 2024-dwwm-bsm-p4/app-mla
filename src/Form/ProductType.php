@@ -17,6 +17,7 @@ class ProductType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, ['label' => 'Nom'])
+            ->add('category', TextType::class, ['label' => 'Catégorie'])
             ->add('description', TextareaType::class, ['label' => 'Description'])
             ->add('type', TextType::class, ['label' => 'Type'])
             ->add('image', FileType::class, [
@@ -26,8 +27,8 @@ class ProductType extends AbstractType
                 'attr' => [
                     'accept' => 'image/*', // This is the correct way to add the accept attribute
                 ],
-            ])
-            ->add('save', SubmitType::class);
+            ]);
+            
     }
 
     public function configureOptions(OptionsResolver $resolver): void
