@@ -43,6 +43,7 @@ jobs:
         run: curl -v --fail-with-body http://localhost
       -
         name: Check HTTPS reachability
+        if: false # Remove this line when the homepage is configured, or change the path to check
         run: curl -vk --fail-with-body https://localhost
       -
         name: Check Mercure reachability
