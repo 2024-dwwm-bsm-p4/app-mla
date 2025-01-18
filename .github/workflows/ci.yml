@@ -12,11 +12,11 @@ concurrency:
 
 jobs:
   tests:
-    name: Tests
+    name: Run PHPUnit Tests
     runs-on: ubuntu-latest
     steps:
       -
-        name: Checkout
+        name: Checkout Repository
         uses: actions/checkout@v4
       -
         name: Set up Docker Buildx
@@ -56,7 +56,7 @@ jobs:
         run: docker compose exec -T php bin/console -e test doctrine:migrations:migrate --no-interaction
       -
         name: Run PHPUnit
-        run: docker compose exec -T php bin/phpunit
+        run: docker compose exec -T php vendor/bin/phpunit
       -
         name: Doctrine Schema Validator
         run: docker compose exec -T php bin/console -e test doctrine:schema:validate
