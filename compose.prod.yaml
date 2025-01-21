@@ -10,6 +10,7 @@ services:
       - target: 80
         published: ${HTTP_PORT:-80}
         protocol: tcp
+    pull_policy: build
 
 ###> doctrine/doctrine-bundle ###
   database:
