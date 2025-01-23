@@ -60,4 +60,6 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 	echo 'PHP app ready!'
 fi
 
+php bin/console tailwind:build --minify
+php bin/console asset-map:compile
 exec docker-php-entrypoint "$@"
