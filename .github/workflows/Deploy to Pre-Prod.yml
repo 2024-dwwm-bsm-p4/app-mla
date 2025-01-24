@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - preprod
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
