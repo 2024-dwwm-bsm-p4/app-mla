@@ -16,7 +16,7 @@ services:
         protocol: tcp
     pull_policy: build
     volumes:
-      - image:app/public/uploads/images
+      - images:app/public/uploads/images
 
 ###> doctrine/doctrine-bundle ###
   database:
@@ -46,7 +46,7 @@ volumes:
   caddy_data:
   caddy_config:
   postgres_data:
-  image:
+  images:
 
 ###> doctrine/doctrine-bundle ###
   database_data:
