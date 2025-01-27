@@ -76,6 +76,25 @@ final class ProductController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $imageFile = $form->get('image')->getData();
+            if ($imageFile) {
+                $newFilename = uniqid() . '.' . $imageFile->guessExtension();
+
+                try {
+                    $imageFile->move(
+                        $this->getParameter('images_directory'), // Définir ce paramètre dans services.yaml
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // Si une erreur survient lors du téléchargement du fichier
+                    $this->addFlash('error', 'Error uploading the image.');
+                    return $this->redirectToRoute('product_new');
+                }
+
+                // Set the image filename in the entity
+                $product->setImage($newFilename);
+            }
+    
             $entityManager->flush();
 
             return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);

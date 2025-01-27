@@ -48,10 +48,9 @@
         <div class="grid grid-cols-2 gap-6">
             {% for product in products %}
                 <div class="bg-white rounded-lg overflow-hidden shadow-md">
-                    <img src="{{ asset('uploads/images/' ~ product.image) }}" alt="{{ product.name }}" class="w-full h-40 object-cover">
+                    <img src="{{ asset('uploads/produits/' ~ product.image) }}" alt="{{ product.name }}" class="w-full h-40 object-cover">
                     <div class="p-4 text-center text-gray-800 font-semibold">{{ product.name }}</div>
                     <div class="p-4 text-gray-600">{{ product.description }}</div>
-                    <div class="p-4 text-gray-600">Type : {{ product.type }}</div>
                     <div class="p-4 text-center">
                         <a href="{{ path('app_product_show', {'id': product.id}) }}" class="text-blue-600 hover:underline mr-4">Afficher</a>
                         <a href="{{ path('app_product_edit', {'id': product.id}) }}" class="text-green-600 hover:underline">Modifier</a>
