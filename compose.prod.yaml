@@ -15,6 +15,8 @@ services:
         published: ${HTTP_PORT:-60001}
         protocol: tcp
     pull_policy: build
+    volumes:
+      - image:app/public/uploads/images
 
 ###> doctrine/doctrine-bundle ###
   database:
@@ -44,6 +46,7 @@ volumes:
   caddy_data:
   caddy_config:
   postgres_data:
+  image:
 
 ###> doctrine/doctrine-bundle ###
   database_data:
