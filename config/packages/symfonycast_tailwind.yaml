@@ -1,0 +1,2 @@
+symfonycasts_tailwind:
+    postcss_config_file: 'postcss.config.js'
