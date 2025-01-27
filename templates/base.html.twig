@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Bienvenu{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="{% block desc %}{% endblock %}">
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
         {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
@@ -66,7 +68,7 @@
 
 <nav class="bg-white border-gray-200 dark:bg-neutral-600">
   <div class="max-w-screen-xxl flex flex-wrap items-center justify-between mx-auto p-4 leading-normal">
-  <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
+  <a href={{path('app_home')}} class="flex items-center space-x-3 rtl:space-x-reverse">
       <img src="{{ asset('./2-removebg-preview.png') }}" class="h-8" alt="Cantine Verte Logo" />
       <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Cantine Verte</span>
   </a>

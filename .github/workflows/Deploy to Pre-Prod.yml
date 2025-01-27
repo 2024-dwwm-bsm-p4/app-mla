@@ -1,0 +1,16 @@
+name: Deploy to Pre-Prod
+
+on: 
+  pull_request:
+    branches:
+      - preprod
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update Service via Webhook
+        uses: newarifrh/portainer-service-webhook@v1
+        with:
+          webhook_url: http://141.253.125.13:9000/api/stacks/webhooks/3dafe022-dbca-4d02-b623-66d5030e2a17
+
