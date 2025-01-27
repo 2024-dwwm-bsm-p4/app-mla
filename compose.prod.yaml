@@ -16,7 +16,7 @@ services:
         protocol: tcp
     pull_policy: build
     volumes:
-      - images:app/public/uploads/images
+      - images:/app/public/uploads/images
 
 ###> doctrine/doctrine-bundle ###
   database:
