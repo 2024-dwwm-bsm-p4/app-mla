@@ -1,6 +1,6 @@
-@import "tailwindcss";
-@config "../../tailwind.config.js";
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body {
     background-color: rgba(203, 201, 195, 1);
