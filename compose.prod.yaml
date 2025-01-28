@@ -15,6 +15,11 @@ services:
     volumes:
       - images:/app/public/uploads/images
 
+networks:
+  default:
+    external: true 
+    name: proxy
+
 ###> doctrine/doctrine-bundle ###
   database:
     image: postgres:${POSTGRES_VERSION:-16}-alpine
