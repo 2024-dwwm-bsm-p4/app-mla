@@ -6,19 +6,12 @@ services:
       target: frankenphp_prod
     environment:
       APP_ENV: prod
-      SERVER_NAME: ${SERVER_NAME:-http://141.253.125.13:60001}
       APP_SECRET: ${APP_SECRET}
       MERCURE_PUBLISHER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
       MERCURE_SUBSCRIBER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
-
     pull_policy: build
     volumes:
       - images:/app/public/uploads/images
-
-networks:
-  default:
-    external: true 
-    name: proxy
 
 ###> doctrine/doctrine-bundle ###
   database:
@@ -52,3 +45,8 @@ volumes:
 ###> doctrine/doctrine-bundle ###
   database_data:
 ###< doctrine/doctrine-bundle ###
+
+networks:
+  default:
+    external: true 
+    name: proxy
