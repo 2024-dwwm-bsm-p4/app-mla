@@ -3,23 +3,26 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    <h1>Créer un compte</h1>
+<div class="max-w-lg mx-auto px-6 py-10">
+    <h1 class="text-2xl font-bold text-center text-green-700 mb-6">Créer un compte</h1>
 
     {{ form_errors(registrationForm) }}
 
-    {{ form_start(registrationForm) }}
+    {{ form_start(registrationForm, {'attr': {'class': 'space-y-4'}}) }}
         {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
+        {{ form_row(registrationForm.plainPassword, { label: 'Mot de passe' }) }}
         {{ form_row(registrationForm.phone_number) }}
         {{ form_row(registrationForm.roles) }}
         {{ form_row(registrationForm.structure_name) }}
 
+        <div class="flex items-center space-x-2">
+            {{ form_row(registrationForm.agreeTerms, { label: false }) }}
+            <label for="{{ registrationForm.agreeTerms.vars.id }}" class="text-gray-600">
+                J'accepte la <a href="{{ path('app_rgpd') }}" class="text-green-600 hover:underline">politique de confidentialité</a>.
+            </label>
+        </div>
 
-
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Register</button>
+        <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 rounded-lg">S'inscrire</button>
     {{ form_end(registrationForm) }}
+</div>
 {% endblock %}
