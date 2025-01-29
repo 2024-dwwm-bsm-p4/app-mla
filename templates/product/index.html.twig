@@ -3,48 +3,11 @@
 {% block title %}Index produit{% endblock %}
 {% block desc %}Explorez notre catalogue de produits. Découvrez des descriptions détaillées et trouvez ce qui correspond à vos besoins.{% endblock %}
 
-{# {% block body %}
-    <h1>Nos produits</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Type</th>
-                <th>Image</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for product in products %}
-            <tr>
-                <td>{{ product.id }}</td>
-                <td>{{ product.name }}</td>
-                <td>{{ product.description }}</td>
-                <td>{{ product.type }}</td>
-                <td><img src="{{ asset('uploads/images/' ~ product.image) }}" alt=""></td>
-                <td>
-                    <a href="{{ path('app_product_show', {'id': product.id}) }}">show</a>
-                    <a href="{{ path('app_product_edit', {'id': product.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_product_new') }}">Create new</a>
-{% endblock %} #}
 
 {% block body %}
 <div class="bg-gray-200 flex items-center justify-center min-h-screen">
     <div class="bg-gray-800 text-white p-8 rounded-lg shadow-lg w-4/5 max-w-5xl">
-        <h1 class="text-center text-2xl font-bold mb-8">Nos produits</h1>
+        <h1 class="text-center text-2xl font-bold mb-8">Nos produits:</h1>
         <div class="grid grid-cols-2 gap-6">
             {% for product in products %}
                 <div class="bg-white rounded-lg overflow-hidden shadow-md">

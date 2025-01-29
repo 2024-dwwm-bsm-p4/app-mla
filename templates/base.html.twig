@@ -16,54 +16,6 @@
     </head>
     <body class="grey lighten-2">
     {% block navbar %}
-          {# <nav class="grey darken-3">
-    <div class="nav-wrapper">
-<a href="#!" class="brand-logo flex items-center">
-  <img src="{{ asset('./2-removebg-preview.png') }}" class="pr-14 w-36 h-28">
-</a>
-  <span class="ml-16 text-lg font-bold">Cantine Verte</span>
-
-      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="sass.html">Accueil</a></li>
-        <li><a href="badges.html">Produits</a></li>
-        <li><a href="collapsible.html">Producteurs</a></li>
-        <li><a class="waves-effect waves-light btn">Connexion</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <ul class="sidenav" id="mobile-demo">
-        <li><a href="sass.html">Accueil</a></li>
-        <li><a href="badges.html">Produits</a></li>
-        <li><a href="collapsible.html">Producteurs</a></li>
-        <li><a class="waves-effect waves-light btn">Connexion</a></li>
-  </ul> #}
-
-
-  {# <nav>
-    <div class="nav-wrapper">
-      <a href="#!" class="brand-logo flex items-center"> 
-       <img src="{{ asset('./2-removebg-preview.png') }}" class="pr-14 w-36 h-28">
-         <span class="ml-16 text-lg font-bold">Cantine Verte</span>
-      </a>
-      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="sass.html">Sass</a></li>
-        <li><a href="badges.html">Components</a></li>
-        <li><a href="collapsible.html">Javascript</a></li>
-        <li><a href="mobile.html">Mobile</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <ul class="sidenav" id="mobile-demo">
-    <li><a href="sass.html">Sass</a></li>
-    <li><a href="badges.html">Components</a></li>
-    <li><a href="collapsible.html">Javascript</a></li>
-    <li><a href="mobile.html">Mobile</a></li>
-  </ul> #}
-
 
 
 <nav class="bg-white border-gray-200 dark:bg-neutral-600">
@@ -72,13 +24,19 @@
       <img src="{{ asset('./2-removebg-preview.png') }}" class="h-8" alt="Cantine Verte Logo" />
       <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Cantine Verte</span>
   </a>
+
+
   <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-     {# <a href="" <button type="button" class="text-white bg-lime-700 hover:bg-lime-700 focus:ring-4 focus:outline-none focus:ring-lime-700 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-lime-700 dark:hover:bg-lime-700 dark:focus:ring-lime-700">Connexion</button> </a> #}
+    <a href="{{path('app_register')}}">
+      <button class="px-5 py-2 bg-blue-500 text-white font-semibold rounded-md transition duration-300 ease-in-out hover:bg-blue-600 hover:scale-105">
+      inscription
+      </button>
+    </a>
+
      <a href="{{ is_granted('IS_AUTHENTICATED_FULLY') ? path('app_logout') : path('app_login') }}">
-    <button type="button"
-            class="text-white bg-lime-700 hover:bg-lime-700 focus:ring-4 focus:outline-none focus:ring-lime-700 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-lime-700 dark:hover:bg-lime-700 dark:focus:ring-lime-700">
-        {{ is_granted('IS_AUTHENTICATED_FULLY') ? 'Déconnexion' : 'Connexion' }}
-    </button>
+<button class="px-5 py-2 bg-green-500 text-white font-semibold rounded-md transition duration-300 ease-in-out hover:bg-green-600 hover:scale-105">
+    Connexion
+</button>
 </a>
 
       <button data-collapse-toggle="navbar-cta" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-cta" aria-expanded="false">

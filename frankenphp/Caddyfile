@@ -1,57 +1,52 @@
 {
-	{$CADDY_GLOBAL_OPTIONS}
-
-	frankenphp {
-		{$FRANKENPHP_CONFIG}
-	}
+    # Active FrankenPHP
+    frankenphp
+    auto_https off
+    admin off
+    debug
+    http_port 80
+    https_port 443
 }
 
-{$CADDY_EXTRA_CONFIG}
+:80 {
+    # Root directory
+    root * /app/public
 
-{$SERVER_NAME:localhost} {
-	log {
-		{$CADDY_SERVER_LOG_OPTIONS}
-		# Redact the authorization query parameter that can be set by Mercure
-		format filter {
-			request>uri query {
-				replace authorization REDACTED
-			}
-		}
-	}
+    # PHP handling
+    php_server {
+        index index.php
+    }
+    
+    # Compression
+    encode gzip
+    
+    # Static files
+    file_server {
+        hide .* *.php
+    }
+    
+    # Headers
+    header {
+        # Security headers
+        X-Frame-Options "SAMEORIGIN"
+        X-Content-Type-Options "nosniff"
+        X-XSS-Protection "1; mode=block"
+        
+        # CORS
+        Access-Control-Allow-Origin "*"
+        Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+        Access-Control-Allow-Headers "*"
+    }
+    
+    # Logging
+    log {
+        output stdout
+        format json
+        level DEBUG
+    }
 
-	root /app/public
-	encode zstd br gzip
-
-	mercure {
-		# Transport to use (default to Bolt)
-		transport_url {$MERCURE_TRANSPORT_URL:bolt:///data/mercure.db}
-		# Publisher JWT key
-		publisher_jwt {env.MERCURE_PUBLISHER_JWT_KEY} {env.MERCURE_PUBLISHER_JWT_ALG}
-		# Subscriber JWT key
-		subscriber_jwt {env.MERCURE_SUBSCRIBER_JWT_KEY} {env.MERCURE_SUBSCRIBER_JWT_ALG}
-		# Allow anonymous subscribers (double-check that it's what you want)
-		anonymous
-		# Enable the subscription API (double-check that it's what you want)
-		subscriptions
-		# Extra directives
-		{$MERCURE_EXTRA_DIRECTIVES}
-	}
-
-	vulcain
-
-	{$CADDY_SERVER_EXTRA_DIRECTIVES}
-
-	# Disable Topics tracking if not enabled explicitly: https://github.com/jkarlin/topics
-	header ?Permissions-Policy "browsing-topics=()"
-
-	@phpRoute {
-		not path /.well-known/mercure*
-		not file {path}
-	}
-	rewrite @phpRoute index.php
-
-	@frontController path index.php
-	php @frontController
-
-	file_server
+    # Error handling
+    handle_errors {
+        respond "Error: {err.status_code} {err.message}" 500
+    }
 }
