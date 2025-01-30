@@ -19,7 +19,6 @@ class ProductType extends AbstractType
             ->add('name', TextType::class, array("attr" => ['label' => 'Nom', "class" => "border-red-500 border-4"]))
             ->add('category', TextType::class, ['label' => 'Catégorie'])
             ->add('description', TextareaType::class, ['label' => 'Description'])
-            ->add('type', TextType::class, ['label' => 'Type'])
             ->add('image', FileType::class, [
                 'label' => 'Image (PNG, JPG, JPEG, GIF)',
                 'mapped' => false, // Not mapped to the entity because it's a file input
