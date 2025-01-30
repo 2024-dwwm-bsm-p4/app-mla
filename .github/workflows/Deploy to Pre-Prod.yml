@@ -12,5 +12,7 @@ jobs:
       - name: Update Service via Webhook
         uses: newarifrh/portainer-service-webhook@v1
         with:
+
           webhook_url: https://portainer-cantine-verte.aledorian-legrand.fr/api/stacks/webhooks/3dafe022-dbca-4d02-b623-66d5030e2a17
+
 
