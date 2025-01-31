@@ -28,14 +28,18 @@
 
   <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
     <a href="{{path('app_register')}}">
-      <button class="px-5 py-2 bg-blue-500 text-white font-semibold rounded-md transition duration-300 ease-in-out hover:bg-blue-600 hover:scale-105">
+      <button 
+      {% if not app.user %}
+      class="px-5 py-2 bg-blue-500 text-white font-semibold rounded-md transition duration-300 ease-in-out hover:bg-blue-600 hover:scale-105">
       Inscription
+      {% endif %}
       </button>
     </a>
 
      <a href="{{ is_granted('IS_AUTHENTICATED_FULLY') ? path('app_logout') : path('app_login') }}">
 <button class="px-5 py-2 bg-green-500 text-white font-semibold rounded-md transition duration-300 ease-in-out hover:bg-green-600 hover:scale-105">
-    Connexion
+    {{ is_granted('IS_AUTHENTICATED_FULLY') ? 'Déconnexion' : 'Connexion' }}
+    
 </button>
 </a>
 
