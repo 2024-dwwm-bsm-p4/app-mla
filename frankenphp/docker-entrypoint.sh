@@ -57,9 +57,14 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 	setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX var
 	setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX var
 
+	if [[ "$APP_ENV" == "dev" ]]; then
+	php bin/console tailwind:build
+	else
+	php bin/console tailwind:build --minify
+	php bin/console asset-map:compile
+	fi
+	
 	echo 'PHP app ready!'
 fi
 
-php bin/console tailwind:build --minify
-php bin/console asset-map:compile
 exec docker-php-entrypoint "$@"

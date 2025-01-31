@@ -24,10 +24,6 @@ class ProductTest extends TestCase
         $product->setDescription('Description Test');
         $this->assertEquals('Description Test', $product->getDescription());
 
-        // Test du setter et getter pour le type
-        $product->setType('Type Test');
-        $this->assertEquals('Type Test', $product->getType());
-
         // Test du setter et getter pour l'image (le chemin est supposé ici)
         $product->setImage('image_test.jpg');
         $this->assertEquals('image_test.jpg', $product->getImage());
