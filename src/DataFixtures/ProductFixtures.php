@@ -13,6 +13,7 @@ class ProductFixtures extends Fixture
         // Fruits
         $product1 = new Product();
         $product1->setName('Pomme');
+        $product1->setName('poire');
         $product1->setCategory('Fruits');
         $product1->setDescription('Une pomme fraîche et croquante issue de l’agriculture biologique.');
         $product1->setImage('pomme.jpg');
