@@ -1,0 +1,11 @@
+<h1>Produits BIO</h1>
+
+<ul>
+    {% for product in products %}
+        <li>{{ product.name }} - {{ product.category }}</li>
+    {% else %}
+        <li>Aucun produit bio trouvé.</li>
+    {% endfor %}
+</ul>
+
+<a href="{{ path('app_product_index') }}" class="btn btn-primary">← Retour à la liste des produits</a>

@@ -8,6 +8,9 @@
 <div class="bg-gray-200 flex items-center justify-center min-h-screen">
     <div class="bg-gray-800 text-white p-8 rounded-lg shadow-lg w-4/5 max-w-5xl">
         <h1 class="text-center text-2xl font-bold mb-8">Nos produits:</h1>
+        <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+            <a href="{{ path('app_product_bio') }}" class="btn btn-success">Voir les produits BIO</a>
+
         <div class="grid grid-cols-2 gap-6">
             {% for product in products %}
                 <div class="bg-white rounded-lg overflow-hidden shadow-md">
@@ -24,7 +27,7 @@
             {% endfor %}
         </div>
         <div class="mt-8 text-center">
-            <a href="{{ path('app_product_new') }}" class="bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-500">Créer un nouveau produit</a>
+            <a href="{{ path('app_product_new') }}" class="btn btn-success">Créer un nouveau produit</a>
         </div>
     </div>
 </div>

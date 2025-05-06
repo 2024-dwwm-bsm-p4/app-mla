@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ProductType extends AbstractType
@@ -18,6 +19,10 @@ class ProductType extends AbstractType
         $builder
             ->add('name', TextType::class, array("attr" => ['label' => 'Nom', "class" => "border-red-500 border-4"]))
             ->add('category', TextType::class, ['label' => 'Catégorie'])
+            ->add('isBio', CheckboxType::class, [
+                'label'    => 'Produit Bio',
+                'required' => false,
+            ])
             ->add('description', TextareaType::class, ['label' => 'Description'])
             ->add('image', FileType::class, [
                 'label' => 'Image (PNG, JPG, JPEG, GIF)',
@@ -27,7 +32,7 @@ class ProductType extends AbstractType
                     'accept' => 'image/*', // This is the correct way to add the accept attribute
                 ],
             ]);
-            
+                
     }
 
     public function configureOptions(OptionsResolver $resolver): void
