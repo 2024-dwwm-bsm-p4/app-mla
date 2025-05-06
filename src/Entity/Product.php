@@ -25,6 +25,9 @@ class Product
     #[ORM\Column(length: 255)]
     private ?string $category = null;
 
+    #[ORM\Column(type: 'boolean', nullable: true)]
+    private ?bool $isBio = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +77,18 @@ class Product
     public function setCategory(string $category): static
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getIsBio(): ?bool
+    {
+        return $this->isBio;
+    }
+
+    public function setIsBio(?bool $isBio): static
+    {
+        $this->isBio = $isBio;
 
         return $this;
     }

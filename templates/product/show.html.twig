@@ -24,6 +24,17 @@
                 <th>Image</th>
                 <td>{{ product.image }}</td>
             </tr>
+            <tr>
+                <th>Produit Bio</th>
+                <td>
+                    {% if product.isBio() %}
+                        Oui
+                    {% else %}
+                        Non
+                    {% endif %}
+                </td>
+            </tr>
+
         </tbody>
     </table>
 

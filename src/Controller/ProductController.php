@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
+use App\Services\BioProductFilter;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -61,6 +62,21 @@ final class ProductController extends AbstractController
         ]);
     }
 
+    #[Route('/bio', name: 'app_product_bio')]
+    public function bioProducts(ProductRepository $productRepository, BioProductFilter $bioFilter): Response
+    {
+        // Récupère tous les produits
+        $allProducts = $productRepository->findAll();
+
+        // Filtre les produits bio en utilisant le service
+        $bioProducts = $bioFilter->filter($allProducts);
+
+        // Affiche la vue avec la liste des produits bio
+        return $this->render('product/bio.html.twig', [
+            'products' => $bioProducts,
+        ]);
+    }
+
     #[Route('/{id}', name: 'app_product_show', methods: ['GET'])]
     public function show(Product $product): Response
     {
@@ -79,7 +95,7 @@ final class ProductController extends AbstractController
             $imageFile = $form->get('image')->getData();
             if ($imageFile) {
                 $newFilename = uniqid() . '.' . $imageFile->guessExtension();
-
+                
                 try {
                     $imageFile->move(
                         $this->getParameter('images_directory'), // Définir ce paramètre dans services.yaml
@@ -90,23 +106,24 @@ final class ProductController extends AbstractController
                     $this->addFlash('error', 'Error uploading the image.');
                     return $this->redirectToRoute('product_new');
                 }
-
+                
                 // Set the image filename in the entity
                 $product->setImage($newFilename);
             }
-    
+            
             $entityManager->flush();
-
+            
             return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
         }
-
+        
         return $this->render('product/edit.html.twig', [
             'product' => $product,
             'form' => $form,
         ]);
     }
 
-    #[Route('/{id}', name: 'app_product_delete', methods: ['POST'])]
+
+    #[Route('/{id<\d+>}', name: 'app_product_delete', methods: ['POST'])]
     public function delete(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->getPayload()->getString('_token'))) {
@@ -116,4 +133,5 @@ final class ProductController extends AbstractController
 
         return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
     }
+
 }
