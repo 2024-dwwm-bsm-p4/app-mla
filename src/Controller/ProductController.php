@@ -19,6 +19,7 @@ final class ProductController extends AbstractController
     #[Route(name: 'app_product_index', methods: ['GET'])]
     public function index(ProductRepository $productRepository): Response
     {
+        
         return $this->render('product/index.html.twig', [
             'products' => $productRepository->findAll(),
         ]);
@@ -30,6 +31,16 @@ final class ProductController extends AbstractController
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
+
+        if ($this->isGranted('ROLE_COLLECTIVITY')) {
+            return $this->render('producter/show_readonly.html.twig', [
+                'product' => $product,
+            ]);
+        }
+        
+        return $this->render('product/show.html.twig', [
+            'product' => $product,
+        ]);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $imageFile = $form->get('image')->getData();
@@ -126,6 +137,7 @@ final class ProductController extends AbstractController
     #[Route('/{id<\d+>}', name: 'app_product_delete', methods: ['POST'])]
     public function delete(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
+        
         if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($product);
             $entityManager->flush();
