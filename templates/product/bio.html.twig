@@ -1,11 +1,34 @@
-<h1>Produits BIO</h1>
+{% extends 'base.html.twig' %}
 
-<ul>
-    {% for product in products %}
-        <li>{{ product.name }} - {{ product.category }}</li>
-    {% else %}
-        <li>Aucun produit bio trouvé.</li>
-    {% endfor %}
-</ul>
+{% block title %}Produits BIO{% endblock %}
+{% block desc %}Découvrez notre sélection de produits issus de l'agriculture biologique.{% endblock %}
 
-<a href="{{ path('app_product_index') }}" class="btn btn-primary">← Retour à la liste des produits</a>
+{% block body %}
+<div class="bg-gray-200 flex items-center justify-center min-h-screen">
+    <div class="bg-gray-800 text-white p-8 rounded-lg shadow-lg w-4/5 max-w-5xl">
+        <h1 class="text-center text-2xl font-bold mb-8">Nos produits BIO</h1>
+
+        <div class="grid grid-cols-2 gap-6">
+            {% for product in products %}
+                <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                    <img src="{{ asset('uploads/produits/' ~ product.image) }}" alt="{{ product.name }}" class="w-full h-40 object-cover">
+                    <div class="p-4 text-center text-gray-800 font-semibold">{{ product.name }}</div>
+                    <div class="p-4 text-gray-600">{{ product.description }}</div>
+                    <div class="p-4 text-center">
+                        {% if is_granted('ROLE_PRODUCTOR') %}
+                            <a href="{{ path('app_product_show', {'id': product.id}) }}" class="text-blue-600 hover:underline mr-4">Afficher</a>
+                            <a href="{{ path('app_product_edit', {'id': product.id}) }}" class="text-green-600 hover:underline">Modifier</a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-span-2 text-center text-gray-200">Aucun produit bio trouvé.</div>
+            {% endfor %}
+        </div>
+
+        <div class="mt-8 text-center">
+            <a href="{{ path('app_product_index') }}" class="btn btn-primary">← Retour à la liste des produits</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

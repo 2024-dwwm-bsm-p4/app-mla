@@ -8,8 +8,10 @@
 <div class="bg-gray-200 flex items-center justify-center min-h-screen">
     <div class="bg-gray-800 text-white p-8 rounded-lg shadow-lg w-4/5 max-w-5xl">
         <h1 class="text-center text-2xl font-bold mb-8">Nos produits:</h1>
-        <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+
+        <div class="text-center mb6">
             <a href="{{ path('app_product_bio') }}" class="btn btn-success">Voir les produits BIO</a>
+        </div>
 
         <div class="grid grid-cols-2 gap-6">
             {% for product in products %}
@@ -18,17 +20,22 @@
                     <div class="p-4 text-center text-gray-800 font-semibold">{{ product.name }}</div>
                     <div class="p-4 text-gray-600">{{ product.description }}</div>
                     <div class="p-4 text-center">
+                        {% if is_granted('ROLE_PRODUCTOR') %}
                         <a href="{{ path('app_product_show', {'id': product.id}) }}" class="text-blue-600 hover:underline mr-4">Afficher</a>
+                        {% endif %}
+                        {% if is_granted('ROLE_PRODUCTOR') %}
                         <a href="{{ path('app_product_edit', {'id': product.id}) }}" class="text-green-600 hover:underline">Modifier</a>
+                        {% endif %}
                     </div>
                 </div>
             {% else %}
                 <div class="col-span-2 text-center text-gray-200">Aucun produit trouvé.</div>
             {% endfor %}
         </div>
-        <div class="mt-8 text-center">
-            <a href="{{ path('app_product_new') }}" class="btn btn-success">Créer un nouveau produit</a>
-        </div>
-    </div>
+        {% if is_granted('ROLE_PRODUCTOR') %}
+            <div class="mt-8 text-center">
+                <a href="{{ path('app_product_new') }}" class="btn btn-success">Créer un nouveau produit</a>
+            </div>
+        {% endif %}    </div>
 </div>
 {% endblock %}

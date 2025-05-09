@@ -40,6 +40,7 @@ security:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/user, roles: ROLE_USER }
+        - { path: ^/product, roles: IS_AUTHENTICATED_FULLY }
 
 
     role_hierarchy:

@@ -28,51 +28,45 @@ final class ProductController extends AbstractController
     #[Route('/new', name: 'app_product_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+        // Bloquer l'accès aux collectivités
+        if (!$this->isGranted('ROLE_PRODUCTOR')) {
+            throw $this->createAccessDeniedException('Seuls les producteurs peuvent créer un produit.');
+        }
+    
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
-
-        if ($this->isGranted('ROLE_COLLECTIVITY')) {
-            return $this->render('producter/show_readonly.html.twig', [
-                'product' => $product,
-            ]);
-        }
-        
-        return $this->render('product/show.html.twig', [
-            'product' => $product,
-        ]);
-
+    
         if ($form->isSubmitted() && $form->isValid()) {
             $imageFile = $form->get('image')->getData();
             if ($imageFile) {
                 $newFilename = uniqid() . '.' . $imageFile->guessExtension();
-
+    
                 try {
                     $imageFile->move(
-                        $this->getParameter('images_directory'), // Définir ce paramètre dans services.yaml
+                        $this->getParameter('images_directory'),
                         $newFilename
                     );
                 } catch (FileException $e) {
-                    // Si une erreur survient lors du téléchargement du fichier
-                    $this->addFlash('error', 'Error uploading the image.');
-                    return $this->redirectToRoute('product_new');
+                    $this->addFlash('error', 'Erreur lors du téléchargement de l’image.');
+                    return $this->redirectToRoute('app_product_new');
                 }
-
-                // Set the image filename in the entity
+    
                 $product->setImage($newFilename);
             }
+    
             $entityManager->persist($product);
             $entityManager->flush();
-
-            return $this->redirectToRoute('app_product_index', [], Response::HTTP_SEE_OTHER);
+    
+            return $this->redirectToRoute('app_product_index');
         }
-
+    
         return $this->render('product/new.html.twig', [
             'product' => $product,
             'form' => $form,
         ]);
     }
-
+    
     #[Route('/bio', name: 'app_product_bio')]
     public function bioProducts(ProductRepository $productRepository, BioProductFilter $bioFilter): Response
     {
@@ -87,7 +81,7 @@ final class ProductController extends AbstractController
             'products' => $bioProducts,
         ]);
     }
-
+    
     #[Route('/{id}', name: 'app_product_show', methods: ['GET'])]
     public function show(Product $product): Response
     {
