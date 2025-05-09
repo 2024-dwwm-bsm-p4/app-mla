@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Entity;
+use App\Entity\User;
 
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -27,6 +28,22 @@ class Product
 
     #[ORM\Column(type: 'boolean', nullable: true)]
     private ?bool $isBio = false;
+
+    #[ORM\ManyToOne(inversedBy: 'products')]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?User $user = null;
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
 
     public function getId(): ?int
     {
