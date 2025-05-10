@@ -19,7 +19,7 @@ security:
             form_login:
                 login_path: app_login
                 check_path: app_login
-                default_target_path: app_user
+                default_target_path: app_home
                 enable_csrf: true
 
             logout:
@@ -40,6 +40,7 @@ security:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/user, roles: ROLE_USER }
+        - { path: ^/product, roles: IS_AUTHENTICATED_FULLY }
 
 
     role_hierarchy:

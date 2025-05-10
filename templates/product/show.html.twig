@@ -4,6 +4,7 @@
 {% block desc %}Consultez les détails complets de nos produits : caractéristiques, avantages, et bien plus encore pour faire le meilleur choix.{% endblock %}
 
 {% block body %}
+
     <h1>Produit</h1>
 
     <table class="table">
@@ -24,6 +25,17 @@
                 <th>Image</th>
                 <td>{{ product.image }}</td>
             </tr>
+            <tr>
+                <th>Produit Bio</th>
+                <td>
+                    {% if product.isBio() %}
+                        Oui
+                    {% else %}
+                        Non
+                    {% endif %}
+                </td>
+            </tr>
+
         </tbody>
     </table>
 

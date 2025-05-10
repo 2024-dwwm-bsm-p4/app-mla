@@ -16,7 +16,7 @@ class ProductFixtures extends Fixture
         $product1->setCategory('Fruits');
         $product1->setDescription('Une pomme fraîche et croquante issue de l’agriculture biologique.');
         $product1->setImage('pomme.jpg');
-        $manager->persist($product1);
+        $manager->persist($product1); 
     
         $product2 = new Product();
         $product2->setName('Banane');

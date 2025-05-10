@@ -48,18 +48,23 @@ if [ "$1" = 'frankenphp' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 			echo 'The database is now ready and reachable'
 		fi
 
-		if [ "$( find ./migrations -iname '*.php' -print -quit )" ]; then
-			php bin/console doctrine:migrations:migrate --no-interaction --all-or-nothing
+		#if [ "$( find ./migrations -iname '*.php' -print -quit )" ]; then
+			#php bin/console doctrine:migrations:migrate --no-interaction --all-or-nothing
 			# php bin/console doctrine:fixtures:load 
-		fi
+		#fi
 	fi
 
 	setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX var
 	setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX var
 
+	if [[ "$APP_ENV" == "dev" ]]; then
+	php bin/console tailwind:build
+	else
+	php bin/console tailwind:build --minify
+	php bin/console asset-map:compile
+	fi
+	
 	echo 'PHP app ready!'
 fi
 
-php bin/console tailwind:build --minify
-php bin/console asset-map:compile
 exec docker-php-entrypoint "$@"

@@ -1,0 +1,1 @@
+{"version":1,"defects":{"App\\Tests\\LoginControllerTest::testLogin":8,"App\\Tests\\RegistrationControllerTest::testRegister":7},"times":{"App\\Tests\\RegistrationControllerTest::testRegister":0.55,"App\\Tests\\Entity\\ProductTest::testGettersAndSetters":0.003}}
