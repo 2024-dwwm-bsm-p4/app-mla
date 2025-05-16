@@ -18,20 +18,18 @@ class ProductRepository extends ServiceEntityRepository
         
     }
 
-    //    /**
-    //     * @return Product[] Returns an array of Product objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('c')
-    //            ->andWhere('c.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('c.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+        /**
+         * @return Product[] Returns an array of bio Product objects
+         */
+        public function findBioProducts(): array
+        {
+            return $this->createQueryBuilder('p')
+                ->andWhere('p.isBio = :val')
+                ->setParameter('val', true)
+                ->orderBy('p.name', 'ASC')
+                ->getQuery()
+                ->getResult();
+        }
 
     //    public function findOneBySomeField($value): ?Product
     //    {
