@@ -1,0 +1,47 @@
+<mxfile host="65bd71144e">
+    <diagram id="Dq8GHapqptpgfxxfIBe5" name="Page-1">
+        <mxGraphModel dx="1085" dy="795" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="6" value="User" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="80" y="150" width="160" height="150" as="geometry">
+                        <mxRectangle x="80" y="150" width="70" height="50" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="7" value="id&lt;div&gt;&lt;font color=&quot;#000000&quot;&gt;email&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font color=&quot;#000000&quot;&gt;roles&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font color=&quot;#000000&quot;&gt;password&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font color=&quot;#000000&quot;&gt;phone_number&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font color=&quot;#000000&quot;&gt;structure_name&lt;/font&gt;&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="6">
+                    <mxGeometry y="50" width="160" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="Product" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="540" y="150" width="170" height="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="id&lt;div&gt;&lt;font color=&quot;#000000&quot;&gt;user&lt;br&gt;&lt;/font&gt;&lt;div&gt;name&lt;/div&gt;&lt;div&gt;description&lt;/div&gt;&lt;div&gt;image&lt;/div&gt;&lt;div&gt;category&lt;/div&gt;&lt;div&gt;isBio&lt;/div&gt;&lt;/div&gt;" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;" vertex="1" parent="8">
+                    <mxGeometry y="50" width="170" height="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="1,n" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="270" y="200" width="40" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="0,n" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="480" y="200" width="40" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="15" target="8">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="15">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="239" y="230" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="290" y="230"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="15" value="added_by" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;align=center;" vertex="1" parent="1">
+                    <mxGeometry x="340" y="200" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="18" value="&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Seuls les utilisateurs ayant le rôle&amp;nbsp;&lt;/span&gt;&lt;strong data-end=&quot;237&quot; data-start=&quot;223&quot;&gt;producteur&lt;/strong&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;&amp;nbsp;(ou&amp;nbsp;&lt;/span&gt;&lt;strong data-end=&quot;251&quot; data-start=&quot;242&quot;&gt;admin&lt;/strong&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;) peuvent créer et gérer des produits.&lt;/span&gt;&lt;br data-end=&quot;292&quot; data-start=&quot;289&quot;&gt;&lt;br&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;Les utilisateurs ayant le rôle&amp;nbsp;&lt;/span&gt;&lt;strong data-end=&quot;339&quot; data-start=&quot;323&quot;&gt;collectivité&lt;/strong&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;&amp;nbsp;peuvent uniquement&amp;nbsp;&lt;/span&gt;&lt;strong data-end=&quot;372&quot; data-start=&quot;359&quot;&gt;consulter&lt;/strong&gt;&lt;span style=&quot;color: rgb(0, 0, 0);&quot;&gt;&amp;nbsp;les produits disponibles, sans relation directe en base de données.&lt;/span&gt;&lt;div&gt;&lt;font style=&quot;color: rgb(0, 0, 0);&quot;&gt;La relation User -[ 1 , n ]- Product ne concerne que les producteurs.&lt;/font&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="20" y="398" width="760" height="70" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
