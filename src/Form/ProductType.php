@@ -25,11 +25,11 @@ class ProductType extends AbstractType
             ])
             ->add('description', TextareaType::class, ['label' => 'Description'])
             ->add('image', FileType::class, [
-                'label' => 'Image (PNG, JPG, JPEG, GIF)',
+                'label' => 'Image (PNG, JPEG, webp)',
                 'mapped' => false, // Not mapped to the entity because it's a file input
                 'required' => false,
                 'attr' => [
-                    'accept' => 'image/*', // This is the correct way to add the accept attribute
+                    'accept' => 'image/png, image/jpeg, image/webp', // This is the correct way to add the accept attribute
                 ],
             ]);
                 

@@ -33,6 +33,16 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->getEntityManager()->flush();
     }
 
+    public function findUserWithBioProduct(): array
+    {
+        return $this->createQueryBuilder('u')
+            ->innerJoin('u.products', 'p')
+            ->where('p.isBio = true')
+            ->distinct()
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return User[] Returns an array of User objects
     //     */
