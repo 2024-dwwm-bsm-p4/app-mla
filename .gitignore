@@ -34,3 +34,15 @@
 ###> phpstan/phpstan ###
 phpstan.neon
 ###< phpstan/phpstan ###
+
+###>coverage.xml ###
+coverage.xml
+###< coverage.xml ###
+
+###> .sonar/ ###
+.sonar/
+###< .sonar/ ###
+
+###>coverage ###
+coverage/
+###<coverage ###

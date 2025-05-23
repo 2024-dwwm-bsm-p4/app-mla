@@ -54,7 +54,12 @@ final class ProductController extends AbstractController
     
                 $product->setImage($newFilename);
             }
-    
+            $user = $this->getUser();
+            if (!$user) {
+                throw $this->createAccessDeniedException('Utilisateur non connecté.');
+            }
+
+            $product->setUser($user);
             $entityManager->persist($product);
             $entityManager->flush();
     

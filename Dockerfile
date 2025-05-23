@@ -26,6 +26,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     && rm -rf /var/lib/apt/lists/*
 
+
+RUN apt-get update && apt-get install -y curl unzip
+
+# Installer SonarScanner
+ENV SONAR_SCANNER_VERSION=5.0.1.3006-linux
+RUN curl -L -o /tmp/sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SONAR_SCANNER_VERSION}.zip \
+    && unzip /tmp/sonar-scanner.zip -d /opt/ \
+    && rm /tmp/sonar-scanner.zip
+
+ENV PATH="/opt/sonar-scanner-${SONAR_SCANNER_VERSION}/bin:${PATH}"
+
 # Installation des extensions PHP
 RUN set -eux; \
     install-php-extensions \

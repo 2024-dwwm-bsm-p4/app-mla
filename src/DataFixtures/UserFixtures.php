@@ -32,6 +32,7 @@ class UserFixtures extends Fixture
             
             
             $manager->persist($user);
+            $manager->flush();
         }
 
         for ($i = 6; $i <= 10; $i++) {
@@ -47,6 +48,7 @@ class UserFixtures extends Fixture
             
             
             $manager->persist($user);
+            $manager->flush();
         }
 
         

@@ -1,0 +1,6 @@
+projectKey=cantine-verte
+serverUrl=http://localhost:9500
+serverVersion=25.5.0.107428
+dashboardUrl=http://localhost:9500/dashboard?id=cantine-verte
+ceTaskId=877a71c7-f149-45b0-a61b-dfc61c4333d3
+ceTaskUrl=http://localhost:9500/api/ce/task?id=877a71c7-f149-45b0-a61b-dfc61c4333d3

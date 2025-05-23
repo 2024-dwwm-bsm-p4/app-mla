@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Product;
+use App\Entity\User;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
@@ -10,13 +11,29 @@ class ProductFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+
+        //Create a user
+        // $user1 = new User();
+        // $user1->setEmail('productor1@example.com');
+        // $user1->setStructureName('Ferme bio');
+        // $user1->setRoles(['ROLE_PRODUCTOR']);
+        // $user1->setPhoneNumber('0321924137');
+        // $user1->setPassword('hashed_password');
+
+
+        // $manager->persist($user1);
+        // $manager->flush();
+
+
         // Fruits
         $product1 = new Product();
         $product1->setName('Pomme');
         $product1->setCategory('Fruits');
         $product1->setDescription('Une pomme fraîche et croquante issue de l’agriculture biologique.');
         $product1->setImage('pomme.jpg');
+        // $product1->setUser($user1);
         $manager->persist($product1); 
+        $manager->flush();
     
         $product2 = new Product();
         $product2->setName('Banane');

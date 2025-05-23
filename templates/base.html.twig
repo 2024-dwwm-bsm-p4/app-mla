@@ -38,7 +38,7 @@
       </a>
 
       <a href="{{ is_granted('IS_AUTHENTICATED_FULLY') ? path('app_logout') : path('app_login') }}">
-        <button class="px-5 py-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-md transition duration-300 ease-in-out transform hover:scale-105">
+        <button class="px-5 py-2 bg-neutral-500 hover:bg-neutral-400 text-white font-semibold rounded-md transition duration-300 ease-in-out transform hover:scale-105">
           {{ is_granted('IS_AUTHENTICATED_FULLY') ? 'Déconnexion' : 'Connexion' }}
         </button>
       </a>
